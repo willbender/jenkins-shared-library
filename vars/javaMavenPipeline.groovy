@@ -12,8 +12,6 @@ def call(Map config){
         mavenTestsAndCoverage(config)
         //Generate javadoc
         mavenJavadoc(config)
-        //Deploy artefact to artifactory
-        mavenDeployArtifactory(config)
         //Generate docker image
         if(params.dockerImage){
             mavenDockerImage(config)
