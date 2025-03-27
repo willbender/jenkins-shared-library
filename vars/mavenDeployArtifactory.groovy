@@ -2,7 +2,7 @@
 //The artifactory configuration is inside the project pom.
 def call(Map config){
     stage("Deploy Artifact"){
-        docker.image("maven:${env.MVN_TAG}"){
+        docker.image("maven:${env.MVN_TAG}").inside(){
             if (BRANCH_NAME == 'main') {
                 // If the branch is main, then the artifact is deployed as released
                 echo 'Generating a tag'
