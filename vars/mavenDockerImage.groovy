@@ -1,7 +1,7 @@
 //Generates a Docker image from the artifact and upload it to the configured docker registry.
 def call(Map config){
     stage("Create Docker Image"){
-        docker.image("maven:${env.MVN_TAG}")).inside(){
+        docker.image("maven:${env.MVN_TAG}").inside(){
             DOCKER_IMAGE_NAME = env.IMAGE_NAME
             DOCKER_IMAGE_REGISTRY = env.DOCKER_REGISTRY
 
