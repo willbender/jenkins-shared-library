@@ -11,7 +11,7 @@ def call(Map config){
                 sh "${MVN_CMD} versions:set -DnewVersion=${env.IMAGE_VERSION}"
             }
             withCredentials(
-                [usernamePassword(credentialsId: 'docker_registry', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]
+                [usernamePassword(credentialsId: 'docker-registry', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]
                 ) {
                 env.DOCKER_IMAGE = "${DOCKER_IMAGE_REGISTRY}/${DOCKER_IMAGE_NAME}:${env.IMAGE_VERSION}"
                 sh "${MVN_CMD} clean package jib:build -Dmaven.test.skip=true -Dimage=${env.DOCKER_IMAGE} -Djib.to.tags=${BRANCH_NAME} -Djib.to.auth.username=\"\$DOCKER_USERNAME\" -Djib.to.auth.password=\"\$DOCKER_PASSWORD\""
