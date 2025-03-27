@@ -19,4 +19,9 @@ def call(Map config){
     //Changes the display of the build in Jenkins
     currentBuild.displayName = env.IMAGE_VERSION
     currentBuild.description = env.IMAGE_NAME + ' - ' + env.IMAGE_VERSION
+    env.GIT_EMAIL = 'william.bernal@gmail.com'
+	env.GIT_USERNAME = 'willbender'
+    echo 'Configuring git variables'
+	sh "git config user.email \"${env.GIT_EMAIL}\""
+	sh "git config user.name \"${env.GIT_USERNAME}\""
 }
