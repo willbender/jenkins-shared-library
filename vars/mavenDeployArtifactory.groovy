@@ -3,6 +3,10 @@
 def call(Map config){
     stage("Deploy Artifact"){
         docker.image("maven:${env.MVN_TAG}").inside(){
+            GITHUB_TOKEN = credentials('github-token')
+             sh '''
+                git config --global credential.helper '!f() { echo "username=willbender"; echo "password=$GITHUB_TOKEN"; }; f'
+                '''
             if (BRANCH_NAME == 'main') {
                 // If the branch is main, then the artifact is deployed as released
                 echo 'Generating a tag'
